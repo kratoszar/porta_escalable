@@ -1,0 +1,25 @@
+---
+
+interface Props {
+    texto?: string;
+    rutaPDF?: string;
+    claseCSS?: string;
+}
+
+// Valores por defecto
+const { 
+    texto = "Descargar CV", 
+    rutaPDF = "/documentos/CV_Alberto_Rosario_Zarco.pdf", 
+    claseCSS = "button" 
+} = Astro.props;
+---
+
+<a 
+    href={rutaPDF} 
+    download
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class={claseCSS}
+>
+    {texto}
+</a>
