@@ -1,0 +1,68 @@
+---
+import '../assets/css/formularios.css'; 
+---
+
+<form id="form-contacto">
+    <div class="row gtr-uniform gtr-50">
+        <div class="col-6 col-12-xsmall">
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required />
+        </div>
+        <div class="col-6 col-12-xsmall">
+            <input type="email" name="email" id="email" placeholder="Correo electrónico" required />
+        </div>
+        <div class="col-12">
+            <textarea name="mensaje" id="mensaje" placeholder="Mensaje" rows="4" required></textarea>
+        </div>
+    </div>
+    
+    <ul class="actions contenedor-boton">
+        <li><input type="submit" value="Enviar Mensaje" class="button primary" /></li>
+    </ul>
+</form>
+
+<p id="mensaje-estado"></p>
+
+<script>
+    const form = document.querySelector('form#form-contacto') as HTMLFormElement;
+    const mensaje = document.querySelector('p#mensaje-estado') as HTMLElement;
+    const btn = document.querySelector('input[type="submit"]') as HTMLInputElement;
+
+    if (form && mensaje && btn) {
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            
+            btn.value = "Enviando...";
+            btn.disabled = true;
+            
+            mensaje.className = "";
+            mensaje.textContent = "";
+
+            try {
+                const peticion = await fetch('/api/contacto', {
+                    method: 'POST',
+                    body: new FormData(form) 
+                });
+                
+                const respuesta = await peticion.json();
+
+                mensaje.classList.add('visible');
+
+                if (peticion.ok) {
+                    mensaje.classList.add('exito'); 
+                    mensaje.textContent = respuesta.success;
+                    form.reset(); 
+                } else {
+                    mensaje.classList.add('error'); 
+                    mensaje.textContent = respuesta.error;
+                }
+            } catch (error) {
+                mensaje.className = "visible error";
+                mensaje.textContent = "Error de conexión. Inténtalo de nuevo.";
+            }
+
+            btn.value = "Enviar Mensaje";
+            btn.disabled = false;
+        });
+    }
+</script>

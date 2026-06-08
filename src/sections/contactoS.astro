@@ -1,97 +1,17 @@
 ---
-// Tu archivo de contacto (.astro)
+import Formularios from '../components/formularios.astro';
+import ContactoInfo from '../components/contactoinfo.astro';
 ---
 
 <section id="three">
     <h2>Ponte en contacto</h2>
-    <p>¿Tienes un proyecto en mente envíame un mensaje y me pondré en contacto contigo.</p>
-    
+    <p>¿Tienes un proyecto en mente? Envíame un mensaje y me pondré en contacto contigo.</p>
     <div class="row">
         <div class="col-8 col-12-small">
-            
-            <form id="form-contacto">
-                <div class="row gtr-uniform gtr-50">
-                    <div class="col-6 col-12-xsmall">
-                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required />
-                    </div>
-                    <div class="col-6 col-12-xsmall">
-                        <input type="email" name="email" id="email" placeholder="Correo electrónico" required />
-                    </div>
-                    <div class="col-12">
-                        <textarea name="mensaje" id="mensaje" placeholder="Mensaje" rows="4" required></textarea>
-                    </div>
-                </div>
-                
-                <ul class="actions" style="margin-top: 2rem;">
-                    <li><input type="submit" value="Enviar Mensaje" class="button primary" /></li>
-                </ul>
-            </form>
-            
-            <p id="mensaje-estado" style="display: none; font-weight: bold; margin-top: 1rem;"></p>
-            
+            <Formularios />
         </div>
         <div class="col-4 col-12-small">
-            <ul class="labeled-icons">
-                <li>
-                    <h3 class="icon solid fa-home"><span class="label">Dirección</span></h3>
-                    Tulancingo, Hidalgo<br />
-                    México
-                </li>
-                <li>
-                    <h3 class="icon solid fa-mobile-alt"><span class="label">Teléfono</span></h3>
-                    +52 (000) 000-0000
-                </li>
-                <li>
-                    <h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-                    <a href="mailto:tu_correo@gmail.com">tu_correo@gmail.com</a>
-                </li>
-            </ul>
+            <ContactoInfo />
         </div>
     </div>
 </section>
-
-<script>
-    const form = document.getElementById('form-contacto') as HTMLFormElement;
-    const mensajeEstado = document.getElementById('mensaje-estado') as HTMLElement;
-
-    if (form && mensajeEstado) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-        
-            const submitBtn = form.querySelector('input[type="submit"]') as HTMLInputElement;
-            
-            const textoOriginal = submitBtn.value;
-            submitBtn.value = "Enviando...";
-            submitBtn.disabled = true;
-            mensajeEstado.style.display = 'none';
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch('/api/contacto', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                mensajeEstado.style.display = 'block';
-                if (response.ok) {
-                    mensajeEstado.style.color = '#4CAF50'; 
-                    mensajeEstado.textContent = result.success;
-                    form.reset(); 
-                } else {
-                    mensajeEstado.style.color = '#F44336'; 
-                    mensajeEstado.textContent = result.error;
-                }
-            } catch (error) {
-                mensajeEstado.style.display = 'block';
-                mensajeEstado.style.color = '#F44336';
-                mensajeEstado.textContent = "Error de conexión. Inténtalo de nuevo.";
-            } finally {
-                submitBtn.value = textoOriginal;
-                submitBtn.disabled = false;
-            }
-        });
-    }
-</script>

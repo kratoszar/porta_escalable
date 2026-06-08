@@ -1,0 +1,17 @@
+.contenedor-boton {
+    margin-top: 2rem;
+}
+#mensaje-estado {
+    font-weight: bold;
+    margin-top: 1rem;
+    display: none;
+}
+#mensaje-estado.visible {
+    display: block;
+}
+.exito {
+    color: #4CAF50; /* Verde */
+}
+.error {
+    color: #F44336; /* Rojo */
+}
