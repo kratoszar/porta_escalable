@@ -1,5 +1,4 @@
-// src/pages/api/contacto.js
-export const prerender = false; // <-- ESTA ES LA LÍNEA MÁGICA QUE FALTABA
+export const prerender = false;
 
 import nodemailer from 'nodemailer';
 

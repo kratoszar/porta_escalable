@@ -1,5 +1,8 @@
 ---
-
+// @ts-nocheck
+const archivos = import.meta.glob('../mds/habilidades/*.md', { eager: true });
+const habilidades = Object.values(archivos);
+habilidades.sort((a, b) => a.frontmatter.orden - b.frontmatter.orden);
 ---
 
 <section id="two">
@@ -7,18 +10,17 @@
     <p>Ecosistema de tecnologías y herramientas que uso.</p>
     
     <div class="row">
-        <div class="col-4 col-12-small">
-            <h3><span class="icon solid fa-laptop-code"></span> Desarrollo Web</h3>
-            <p>Construcción de interfaces <strong>PHP</strong>, <strong>JavaScript</strong>, <strong>HTML</strong> y <strong>CSS</strong>.</p>
-        </div>
-        <div class="col-4 col-12-small">
-            <h3><span class="icon solid fa-mobile-alt"></span> Desarrollo Móvil</h3>
-            <p>Creación de aplicaciones en <strong>Android Studio</strong>, usando <strong>APIs REST</strong>.</p>
-        </div>
-
-        <div class="col-4 col-12-small">
-            <h3><span class="icon solid fa-database"></span> Datos y Herramientas</h3>
-            <p>Diseño y gestión de bases de datos con <strong>MySQL</strong> y <strong>SQL Server</strong>. Control de versiones con <strong>Git/GitHub</strong>, entornos con <strong>XAMPP</strong> e integración de servicios como <strong>Cloudinary</strong>.</p>
-        </div>
+        {habilidades.map((hab) => {
+            const Contenido = hab.Content;
+            return (
+                <div class="col-4 col-12-small">
+                    <h3>
+                        <span class={`icon solid ${hab.frontmatter.icon}`}></span>
+                        {hab.frontmatter.title}
+                    </h3>
+                    <div><Contenido /></div>
+                </div>
+            );
+        })}
     </div>
 </section>
