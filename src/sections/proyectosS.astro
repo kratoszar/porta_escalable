@@ -5,9 +5,9 @@ import { misProyectos } from '../utils/datosporta.js';
 <section id="two">
     <h2>Proyectos Destacados</h2>
     <div class="row">
-        {misProyectos.map((proyecto) => (
+        {misProyectos.map((proyecto: any) => (
             <Cardporta 
-                imagenC={proyecto.imagenC} 
+                linkGithub={proyecto.linkGithub} 
                 imagenM={proyecto.imagenM} 
                 titulo={proyecto.titulo} 
                 descripcion={proyecto.descripcion} 

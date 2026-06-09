@@ -1,12 +1,11 @@
 ---
-const { imagenC, imagenM, titulo, descripcion } = Astro.props;
+const { linkGithub, imagenM, titulo, descripcion } = Astro.props;
 ---
 
 <article class="col-6 col-12-xsmall work-item">
-	<a href={imagenC} class="image fit thumb">
-		<img src={imagenM} alt={titulo} />
-	</a>
-	<h3>{titulo}</h3>
-	<p>{descripcion}</p>
+    <a href={linkGithub} target="_blank" class="image fit thumb">
+        <img src={imagenM} alt={titulo} />
+    </a>
+    <h3>{titulo}</h3>
+    <p>{descripcion}</p>
 </article>
-
