@@ -1,0 +1,121 @@
+html.dark body {
+  background: #0f172a;
+  color: #94a3b8;
+}
+
+html.dark body,
+html.dark input,
+html.dark select,
+html.dark textarea {
+  color: #94a3b8;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6,
+html.dark strong,
+html.dark b {
+  color: #cbd5e1;
+}
+
+html.dark a {
+  color: #34d399;
+}
+
+html.dark a:hover {
+  color: #34d399 !important;
+}
+
+html.dark hr,
+html.dark .box,
+html.dark ul.alt li,
+html.dark table tbody tr,
+html.dark table thead,
+html.dark table tfoot,
+html.dark #main > section {
+  border-color: #2d3f55;
+}
+
+html.dark blockquote {
+  border-left-color: #2d3f55;
+}
+
+html.dark code {
+  background: #1e293b;
+  border-color: #2d3f55;
+}
+
+html.dark input[type="text"],
+html.dark input[type="password"],
+html.dark input[type="email"],
+html.dark select,
+html.dark textarea {
+  background: #1e293b;
+  color: #94a3b8;
+}
+
+html.dark input[type="text"]:focus,
+html.dark input[type="password"]:focus,
+html.dark input[type="email"]:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+  border-color: #34d399;
+}
+
+html.dark table tbody tr:nth-child(2n + 1) {
+  background-color: #1e293b;
+}
+
+html.dark table th {
+  color: #cbd5e1;
+}
+
+html.dark label {
+  color: #cbd5e1;
+}
+
+html.dark .button {
+  border-color: #2d3f55;
+  color: #cbd5e1 !important;
+}
+
+html.dark .button:hover {
+  border-color: #34d399;
+  color: #34d399 !important;
+}
+
+html.dark .button.primary {
+  background-color: #34d399;
+  border-color: #34d399;
+  color: #0f172a !important;
+}
+
+html.dark input[type="submit"],
+html.dark input[type="reset"],
+html.dark input[type="button"] {
+  border-color: #2d3f55;
+  color: #cbd5e1 !important;
+}
+
+html.dark input[type="submit"]:hover,
+html.dark input[type="reset"]:hover,
+html.dark input[type="button"]:hover {
+  border-color: #34d399;
+  color: #34d399 !important;
+}
+
+html.dark .poptrox-popup {
+  background: #1e293b;
+}
+
+html.dark .poptrox-popup .caption {
+  background: #1e293b;
+  color: #94a3b8;
+}
+
+html.dark header p {
+  color: #64748b;
+}
