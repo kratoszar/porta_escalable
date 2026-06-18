@@ -1,10 +1,9 @@
 ---
 const { linkGithub, imagenM, titulo, descripcion } = Astro.props;
 ---
-
 <article class="col-6 col-12-xsmall work-item">
-    <a href={linkGithub} target="_blank" class="image fit thumb">
-        <img src={imagenM} alt={titulo} />
+    <a href={linkGithub} target="_blank" class="image fit">
+        <img src={imagenM} alt={titulo} style="width: 100%; height: 250px; object-fit: cover;" />
     </a>
     <h3>{titulo}</h3>
     <p>{descripcion}</p>

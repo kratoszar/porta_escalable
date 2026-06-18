@@ -1,26 +1,29 @@
 ---
-// @ts-nocheck
-const archivos = import.meta.glob('../mds/habilidades/*.md', { eager: true });
-const habilidades = Object.values(archivos);
-habilidades.sort((a, b) => a.frontmatter.orden - b.frontmatter.orden);
+import { getSections } from 'emdash';
+const data = await getSections() || {};
+const habilidades = (data.items || [])
+  .filter((sec: any) => sec.slug?.startsWith('habilidad-'))
+  .sort((a: any, b: any) => a.slug.localeCompare(b.slug));
+const sacarTextoPuro = (contenido: any[]) => {
+  return contenido?.map(bloque => 
+    bloque.children?.map((hijo: any) => hijo.text).join('')
+  ).join(' ') || '';
+};
 ---
-
 <section id="two">
     <h2>Habilidades Técnicas</h2>
     <p>Ecosistema de tecnologías y herramientas que uso.</p>
-    
     <div class="row">
-        {habilidades.map((hab) => {
-            const Contenido = hab.Content;
-            return (
-                <div class="col-4 col-12-small">
-                    <h3>
-                        <span class={`icon solid ${hab.frontmatter.icon}`}></span>
-                        {hab.frontmatter.title}
-                    </h3>
-                    <div><Contenido /></div>
-                </div>
-            );
-        })}
+        {habilidades.map((hab: any) => (
+            <div class="col-4 col-12-small">
+                <h3>
+                    <span class={`icon solid ${hab.description || 'fa-code'}`}></span>
+                    {hab.title}
+                </h3>
+                
+                {}
+                <p>{sacarTextoPuro(hab.content)}</p>
+            </div>
+        ))}
     </div>
 </section>

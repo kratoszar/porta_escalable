@@ -1,14 +1,26 @@
+---
+import { getSection } from 'emdash';
+
+const github = await getSection('github');
+const linkedin = await getSection('linkedin');
+const email = await getSection('email');
+---
 <footer id="footer">
     <div class="inner">
         <ul class="icons">
-            <li><a href="https://github.com/kratoszar" target="_blank" rel="noopener noreferrer" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-            
-            <li><a href="https://www.linkedin.com/in/alberto-rosario-zarco-aa2255376/" target="_blank" rel="noopener noreferrer" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            
-            <li><a href="mailto:albertozarco57@gmail.com" class="icon solid fa-envelope"><span class="label">Gmail</span></a></li>
+            {github?.description && (
+                <li><a href={github.description} target="_blank" rel="noopener noreferrer" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+            )}
+            {linkedin?.description && (
+                <li><a href={linkedin.description} target="_blank" rel="noopener noreferrer" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            )}
+            {email?.description && (
+                <li><a href={`mailto:${email.description}`} class="icon solid fa-envelope"><span class="label">Gmail</span></a></li>
+            )}
         </ul>
         <ul class="copyright">
-            <li>&copy; Alberto Rosario Zarco</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            <li>&copy; Alberto Rosario Zarco</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
         </ul>
     </div>
 </footer>

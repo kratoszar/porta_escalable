@@ -1,14 +1,20 @@
 ---
 import Botoncambio from './botonCambio.astro';
+import { getSection } from 'emdash'; 
+const seccionHeader = await getSection('headerp');
+const bloquesDeContenido = seccionHeader?.content || [];
+const htmlLimpiado = bloquesDeContenido.map((bloque: any) => {
+  const textoDelRenglon = bloque.children?.map((hijo: any) => {
+    return hijo.marks?.includes('strong') ? `<strong>${hijo.text}</strong>` : hijo.text;
+  }).join('');
+  return textoDelRenglon;
+}).join('<br />');
 ---
-
 <header id="header">
   <div class="inner">
-    <h1>
-      <strong>Alberto Rosario Zarco</strong><br />
-      Técnico en Programación<br />
-      y estudiante de Ingeniería en Tecnologías de la Información e Innovación Digital.<br />
-    </h1>
+    
+    {}
+    <h1 set:html={htmlLimpiado}></h1>
 
     <Botoncambio />
   </div>

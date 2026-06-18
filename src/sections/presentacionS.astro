@@ -1,20 +1,26 @@
 ---
 import Botoncv from '../components/botoncv.astro';
+import { getSection } from 'emdash';
+const seccionPresentacion = await getSection('presentacion');
+const bloquesDeContenido = seccionPresentacion?.content || [];
 ---
 
-
-
-
 <section id="one">
-    <header class="major">
-        <h2>Desarrollador Full-Stack y Móvil<br />
-        enfocado en crear soluciones eficientes.</h2>
-    </header>
-    <p>Soy estudiante de Ingeniería en Tecnologías de la Información e Innovación Digital y Técnico en Programación me gusta el desarrollo de software y disfruto transformar ideas en plataformas web y móviles funcionales e intuitivas.</p>
-    <p>me gusta resolver problemas construyendo sistemas cuidando la arquitectura y la experiencia final del usuario me gusta aprender constantemente.</p>
-    <p>Mi objetivo es integrarme a un entorno dinámico y colaborativo donde pueda aportar valor a los proyectos, perfeccionar mis habilidades y consolidar mi crecimiento en la industria.</p>
-    
-    <ul class="actions">
-        <li><Botoncv /></li>
-    </ul>
+  {bloquesDeContenido.map((bloque: any) => {
+    const Etiqueta = bloque.style === 'normal' || !bloque.style ? 'p' : bloque.style;
+    const textoDelBloque = bloque.children?.map((hijo: any) => {
+      return hijo.marks?.includes('strong') ? <strong>{hijo.text}</strong> : hijo.text;
+    });
+    if (Etiqueta === 'h2') {
+      return (
+        <header class="major">
+          <Etiqueta>{textoDelBloque}</Etiqueta>
+        </header>
+      );
+    }
+    return <Etiqueta>{textoDelBloque}</Etiqueta>;
+  })}
+  <ul class="actions">
+    <li><Botoncv /></li>
+  </ul>
 </section>

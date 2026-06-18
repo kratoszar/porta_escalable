@@ -119,3 +119,8 @@ html.dark .poptrox-popup .caption {
 html.dark header p {
   color: #64748b;
 }
+
+
+.image.fit:before {
+  display: none !important;
+}

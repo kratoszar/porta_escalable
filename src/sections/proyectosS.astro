@@ -1,16 +1,22 @@
 ---
 import Cardporta from '../components/cardPorta.astro';
-import { misProyectos } from '../utils/datosporta.js';
+import { getSections } from 'emdash';
+
+const { items = [] } = (await getSections()) || {};
+const proyectos = items
+  .filter((sec: any) => sec.slug?.startsWith('proyecto-'))
+  .sort((a: any, b: any) => a.slug.localeCompare(b.slug));
 ---
+
 <section id="two">
     <h2>Proyectos Destacados</h2>
-    <div class="row">
-        {misProyectos.map((proyecto: any) => (
+    <div class="row" style="padding-bottom: 100px;">
+        {proyectos.map((proj: any) => (
             <Cardporta 
-                linkGithub={proyecto.linkGithub} 
-                imagenM={proyecto.imagenM} 
-                titulo={proyecto.titulo} 
-                descripcion={proyecto.descripcion} 
+                titulo={proj.title}
+                linkGithub={proj.description || '#'}
+                imagenM={proj.keywords?.[0] || '/images/thumbs/01.jpg'}
+                descripcion={proj.content?.[0]?.children?.[0]?.text || ''}
             />
         ))}
     </div>
