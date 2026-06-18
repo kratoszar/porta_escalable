@@ -1,21 +1,25 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import node from '@astrojs/node'; // <-- Importamos Node
+import netlify from '@astrojs/netlify';
 import emdash from 'emdash/astro';
 import react from '@astrojs/react';
-import { sqlite } from 'emdash/db';
+import { sqlite, libsql } from 'emdash/db';
 
-// https://astro.build/config
+const isProd = !!process.env.TURSO_URL;
+
 export default defineConfig({
-  site: 'http://localhost:4321', 
+  site: 'https://tu-sitio.netlify.app',
   output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  }),
+  adapter: netlify(),
   integrations: [
     react(),
     emdash({
-      database: sqlite({ url: 'file:./local.db' }) 
+      database: isProd
+        ? libsql({
+            url: process.env.TURSO_URL,
+            authToken: process.env.TURSO_TOKEN
+          })
+        : sqlite({ url: 'file:./local.db' })
     })
   ],
   vite: {
