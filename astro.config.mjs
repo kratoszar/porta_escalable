@@ -5,6 +5,9 @@ import emdash from 'emdash/astro';
 import react from '@astrojs/react';
 import { sqlite, libsql } from 'emdash/db';
 
+// Importamos el plugin oficial
+import { emdashSmtp } from 'emdash-smtp';
+
 const isProd = !!process.env.TURSO_URL;
 
 export default defineConfig({
@@ -14,6 +17,9 @@ export default defineConfig({
   integrations: [
     react(),
     emdash({
+      // @ts-ignore
+      plugins: [emdashSmtp()],
+      
       database: isProd
         ? libsql({
             url: process.env.TURSO_URL || '',
