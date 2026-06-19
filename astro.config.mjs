@@ -4,8 +4,6 @@ import netlify from '@astrojs/netlify';
 import emdash from 'emdash/astro';
 import react from '@astrojs/react';
 import { sqlite, libsql } from 'emdash/db';
-
-// Importamos el plugin oficial
 import { emdashSmtp } from 'emdash-smtp';
 
 const isProd = !!process.env.TURSO_URL;
@@ -38,6 +36,13 @@ export default defineConfig({
         'use-sync-external-store/shim',
         'use-sync-external-store/shim/with-selector'
       ]
+    },
+    define: {
+      'process.env.EMDASH_EMAIL_FROM': JSON.stringify('albertozarco57@gmail.com'),
+      'process.env.EMDASH_SMTP_HOST': JSON.stringify('smtp.gmail.com'),
+      'process.env.EMDASH_SMTP_PORT': JSON.stringify('587'),
+      'process.env.EMDASH_SMTP_USER': JSON.stringify('albertozarco57@gmail.com'),
+      'process.env.EMDASH_SMTP_PASS': JSON.stringify('hyqceqqadmcqakuq')
     }
   }
 });
