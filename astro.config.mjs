@@ -8,7 +8,7 @@ import { sqlite, libsql } from 'emdash/db';
 const isProd = !!process.env.TURSO_URL;
 
 export default defineConfig({
-  site: 'https://tu-sitio.netlify.app',
+  site: process.env.URL || 'https://portafoliotu.netlify.app',
   output: 'server',
   adapter: netlify(),
   integrations: [
@@ -16,8 +16,8 @@ export default defineConfig({
     emdash({
       database: isProd
         ? libsql({
-            url: process.env.TURSO_URL,
-            authToken: process.env.TURSO_TOKEN
+            url: process.env.TURSO_URL || '',
+            authToken: process.env.TURSO_TOKEN || ''
           })
         : sqlite({ url: 'file:./local.db' })
     })
