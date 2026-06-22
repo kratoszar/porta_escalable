@@ -4,22 +4,20 @@ import netlify from '@astrojs/netlify';
 import emdash from 'emdash/astro';
 import react from '@astrojs/react';
 import { sqlite, libsql } from 'emdash/db';
-import { emdashSmtp } from 'emdash-smtp';
+
 const isProd = !!process.env.TURSO_URL;
+
 export default defineConfig({
-  site: process.env.URL || 'https://portafoliotu.netlify.app',
+  site: 'https://portafoliotu.netlify.app',
   output: 'server',
   adapter: netlify(),
   integrations: [
     react(),
     emdash({
-      // @ts-ignore
-      plugins: [emdashSmtp()],
-      
       database: isProd
         ? libsql({
-            url: process.env.TURSO_URL || '',
-            authToken: process.env.TURSO_TOKEN || ''
+            url: process.env.TURSO_URL,
+            authToken: process.env.TURSO_TOKEN
           })
         : sqlite({ url: 'file:./local.db' })
     })
