@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import netlify from '@astrojs/netlify';
+import node from '@astrojs/node';
 import emdash from 'emdash/astro';
 import react from '@astrojs/react';
 import { sqlite, libsql } from 'emdash/db';
@@ -8,9 +8,11 @@ import { sqlite, libsql } from 'emdash/db';
 const isProd = !!process.env.TURSO_URL;
 
 export default defineConfig({
-  site: 'https://portafoliotu.netlify.app',
+  site: 'https://tu-proyecto.onrender.com',
   output: 'server',
-  adapter: netlify(),
+  adapter: node({
+    mode: 'standalone'
+  }),
   integrations: [
     react(),
     emdash({
